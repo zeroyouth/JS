@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>화살표 빠르게 움직이기
+    </title>
+    <style>
+        body {
+            margin: 100px;
+        }
+
+        .target {
+            width: 50px;
+            height: 50px;
+            background-color: pink;
+            transition: 0.1s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="target"></div>
+    <script>
+        const target = document.querySelector(".target");
+        //이동할 거리
+        let pos = 0;
+        //키의 상태
+        let keys = {};
+
+        document.addEventListener('keyup', stop);
+        document.addEventListener('keydown', move); //누르는 이벤트
+
+        function move(event) {
+            keys[event.key] = true;
+        }
+        function stop(event) {
+            keys[event.key] = false;
+        }
+
+        function play() {
+            if(keys.ArrowRight) {//오른쪽 화살표를 누른 상태라면
+                pos += 5;
+                target.style.transform = `translateX(${pos}px)`;
+            }
+            if(keys.ArrowLeft) {
+                pos -= 5;
+                target.style.transform = `translateX(${pos}px)`;
+            }
+            window.requestAnimationFrame(play); //버터처럼 작동한다, 재귀
+        }
+
+        window.requestAnimationFrame(play); //브라우저에게 수행하기 원하는 애니메이션을 알린다. play함수 호출
+
+        
+
+        // function move(event) { //이벤트 매개변수가 들어가야된다. 
+        //     const keyName = event.key; //이벤트 객체는 리스너 함수에 객체를 넘겨주는 거, 이벤트에 관련된 거 다 있다. 
+        //     if (keyName === 'ArrowRight') {
+        //         pos += 5;
+        //         target.style.transform = `translateX(${pos}px)`;
+        //     }
+        //     if (keyName === 'ArrowLeft') {
+        //         pos -= 5;
+        //         target.style.transform = `translateX(${pos}px)`;
+        //     }
+        // }
+
+    </script>
+</body>
+
+</html>

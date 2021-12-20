@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>화살표 움직이기</title>
+    <style>
+        body{
+            margin: 100px;
+        }
+        .target{
+            width: 50px;
+            height: 50px;
+            background-color: pink;
+            transition: 0.1s;
+        }
+    </style>
+</head>
+<body>
+    <div class="target"></div>
+    <script>
+        const target = document.querySelector(".target");
+        let pos = 0;
+
+        function move(event) { //이벤트 매개변수가 들어가야된다. 
+            const keyName = event.key; //이벤트 객체는 리스너 함수에 객체를 넘겨주는 거, 이벤트에 관련된 거 다 있다. 
+            if(keyName === 'ArrowRight'){
+                pos += 5;
+                target.style.transform = `translateX(${pos}px)`;
+            }
+            if(keyName === 'ArrowLeft'){
+                pos -= 5;
+                target.style.transform = `translateX(${pos}px)`;
+            }
+        }
+
+        document.addEventListener('keydown', move); //누르는 이벤트
+    </script>
+</body>
+</html>
